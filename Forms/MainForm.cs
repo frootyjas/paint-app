@@ -23,11 +23,14 @@ namespace midterm_project
 
         private void InitializeCanvas()
         {
-            canvasBitmap = new Bitmap(picCanvas.Width, picCanvas.Height);
+            canvasBitmap = new Bitmap(picCanvas.Width, picCanvas.Height, PixelFormat.Format32bppArgb);
             canvasGraphics = Graphics.FromImage(canvasBitmap);
             canvasGraphics.Clear(Color.White);
             picCanvas.Image = canvasBitmap;
-          
+
+            // Update pen settings with current bitmap
+            penSettings.CanvasBitmap = canvasBitmap;
+
         }
 
         private void SetStatusLabels()
@@ -52,6 +55,15 @@ namespace midterm_project
         {
             currentTool = tool;
             currentTool.PenSettings = penSettings;
+
+
+            // Ensure fresh state for bucket tool
+            if (tool is BucketTool)
+            {
+                penSettings.CanvasBitmap = canvasBitmap;
+                picCanvas.Refresh();
+            }
+
             UpdateToolStatus();
         }
 
@@ -63,11 +75,19 @@ namespace midterm_project
         private void btnRedo_Click(object sender, EventArgs e) => Redo();
         private void btnFreehand_Click(object sender, EventArgs e) => SelectTool(new FreehandTool());
         private void btnClearCanvas_Click(object sender, EventArgs e) => ClearCanvas();
+        private void btnBucket_Click(object sender, EventArgs e) => SelectTool(new BucketTool());
 
         // Canvas mouse handlers
         private void picCanvas_MouseDown(object sender, MouseEventArgs e)
         {
             currentTool?.MouseDown(e.Location);
+
+            // Immediate redraw after mouse down for bucket tool
+            if (currentTool is BucketTool)
+            {
+                picCanvas.Invalidate();
+                SaveState();
+            }
         }
 
         private void picCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -104,7 +124,7 @@ namespace midterm_project
 
             currentTool.MouseUp(e.Location);
             SaveState();
-            picCanvas.Invalidate();
+            picCanvas.Invalidate(); // Force redraw after operation
         }
 
         private void picCanvas_Paint(object sender, PaintEventArgs e)

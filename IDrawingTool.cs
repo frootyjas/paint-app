@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,85 @@ namespace midterm_project
 
         public abstract void DrawPreview(Graphics g);
     }
+    public class BucketTool : BaseDrawingTool
+    {
+        public override string Name => "Bucket";
 
+        public override void MouseDown(Point location)
+        {
+            if (PenSettings?.CanvasBitmap == null) return;
+
+            FloodFill(location, PenSettings.Color);
+            IsDrawing = true;
+        }
+
+        public override void MouseUp(Point location)
+        {
+            IsDrawing = false;
+        }
+
+        private unsafe void FloodFill(Point startPoint, Color fillColor)
+        {
+            var bitmap = PenSettings.CanvasBitmap;
+            var targetColor = bitmap.GetPixel(startPoint.X, startPoint.Y);
+
+            if (targetColor.ToArgb() == fillColor.ToArgb()) return;
+
+            var q = new Queue<Point>();
+            q.Enqueue(startPoint);
+
+            var bitmapData = bitmap.LockBits(
+                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                ImageLockMode.ReadWrite,
+                PixelFormat.Format32bppArgb
+            );
+
+            try
+            {
+                int bytesPerPixel = 4;
+                byte* scan0 = (byte*)bitmapData.Scan0.ToPointer();
+                int stride = bitmapData.Stride;
+
+                while (q.Count > 0)
+                {
+                    var pt = q.Dequeue();
+                    if (!IsValidPoint(pt, bitmap)) continue;
+
+                    byte* row = scan0 + pt.Y * stride;
+                    int pixelIndex = pt.X * bytesPerPixel;
+
+                    // Check current pixel color
+                    if (row[pixelIndex + 3] != targetColor.A ||
+                        row[pixelIndex + 2] != targetColor.R ||
+                        row[pixelIndex + 1] != targetColor.G ||
+                        row[pixelIndex] != targetColor.B) continue;
+
+                    // Set new color
+                    row[pixelIndex] = fillColor.B;     // Blue
+                    row[pixelIndex + 1] = fillColor.G; // Green
+                    row[pixelIndex + 2] = fillColor.R; // Red
+                    row[pixelIndex + 3] = fillColor.A; // Alpha
+
+                    // Add neighbors
+                    q.Enqueue(new Point(pt.X - 1, pt.Y)); // Left
+                    q.Enqueue(new Point(pt.X + 1, pt.Y)); // Right
+                    q.Enqueue(new Point(pt.X, pt.Y - 1)); // Up
+                    q.Enqueue(new Point(pt.X, pt.Y + 1)); // Down
+                }
+            }
+            finally
+            {
+                bitmap.UnlockBits(bitmapData);
+                PenSettings.CanvasBitmap = bitmap;
+            }
+        }
+
+        private bool IsValidPoint(Point pt, Bitmap bmp) =>
+            pt.X >= 0 && pt.X < bmp.Width && pt.Y >= 0 && pt.Y < bmp.Height;
+
+        public override void DrawPreview(Graphics g) { }
+        public override void MouseMove(Point location) { }
+    }
     public class LineTool : BaseDrawingTool
     {
         public override string Name => "Line";

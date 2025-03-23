@@ -8,6 +8,7 @@ namespace midterm_project
 {
     public class PenSettings
     {
+        public Bitmap CanvasBitmap { get; set; }
         private Color color = Color.Black;
         private int thickness = 2;
       
