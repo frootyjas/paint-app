@@ -121,16 +121,43 @@ namespace midterm_project
             base.MouseUp(location);
         }
     }
-
     public class EraserTool : BaseDrawingTool
     {
+        private List<Point> points = new List<Point>();
+
         public override string Name => "Eraser";
+
+        public override void MouseDown(Point location)
+        {
+            base.MouseDown(location);
+            points.Clear();
+            points.Add(location);
+        }
+
+        public override void MouseMove(Point location)
+        {
+            if (!IsDrawing) return;
+
+            points.Add(location);
+            base.MouseMove(location);
+        }
+
         public override void DrawPreview(Graphics g)
         {
+            if (points.Count < 2) return;
+
             using (var eraser = new Pen(Color.White, PenSettings.Thickness))
             {
-                g.DrawLine(eraser, startPoint, currentPoint);
+                g.DrawLines(eraser, points.ToArray());
             }
         }
+
+        public override void MouseUp(Point location)
+        {
+            points.Add(location);
+            base.MouseUp(location);
+        }
     }
+
+
 }
