@@ -30,6 +30,7 @@ A windows form application with authentication, multiple drawing tools, and user
 ## 📸 Screenshots
 
 ![{D208AB1C-57D6-40C7-AEA2-D91D658D7405}](https://github.com/user-attachments/assets/aaa551a5-dd38-4e8e-bdd1-dd15504b5e82)
-![{A4B83318-C493-4B00-A480-80177CA57AC0}](https://github.com/user-attachments/assets/633f9d4a-1aaf-4910-a80d-d434893e62df)
+![{B64DEBDC-2FCD-4C96-9DBB-087C283ED3C8}](https://github.com/user-attachments/assets/c81eb457-eab6-4411-9829-50532f7161f3)
+
 
 
