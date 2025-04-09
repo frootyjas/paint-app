@@ -31,25 +31,21 @@
             picCanvas = new PictureBox();
             colorDialog = new ColorDialog();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            btnColor = new Button();
             btnSave = new Button();
-            btnFreehand = new Button();
+            btnUndo = new Button();
+            btnRedo = new Button();
+            btnEraser = new Button();
+            btnClearCanva = new Button();
+            numThickness = new NumericUpDown();
             btnLine = new Button();
+            btnFreehand = new Button();
             btnRectangle = new Button();
             btnEllipse = new Button();
-            btnEraser = new Button();
+            btnColor = new Button();
             btnBucket = new Button();
-            label1 = new Label();
-            numThickness = new NumericUpDown();
             label2 = new Label();
             lblTool = new Label();
             label3 = new Label();
-            lblThickness = new Label();
-            label4 = new Label();
-            lblColor = new Label();
-            btnClearCanva = new Button();
-            btnUndo = new Button();
-            btnRedo = new Button();
             ((System.ComponentModel.ISupportInitialize)picCanvas).BeginInit();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numThickness).BeginInit();
@@ -57,10 +53,11 @@
             // 
             // picCanvas
             // 
+            picCanvas.BackColor = Color.White;
             picCanvas.Dock = DockStyle.Fill;
             picCanvas.Location = new Point(0, 0);
             picCanvas.Name = "picCanvas";
-            picCanvas.Size = new Size(1036, 643);
+            picCanvas.Size = new Size(1103, 625);
             picCanvas.TabIndex = 0;
             picCanvas.TabStop = false;
             picCanvas.Paint += picCanvas_Paint;
@@ -70,228 +67,194 @@
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.BackColor = SystemColors.ActiveBorder;
-            flowLayoutPanel1.Controls.Add(btnColor);
+            flowLayoutPanel1.BackColor = Color.Gainsboro;
             flowLayoutPanel1.Controls.Add(btnSave);
-            flowLayoutPanel1.Controls.Add(btnFreehand);
+            flowLayoutPanel1.Controls.Add(btnUndo);
+            flowLayoutPanel1.Controls.Add(btnRedo);
+            flowLayoutPanel1.Controls.Add(btnEraser);
+            flowLayoutPanel1.Controls.Add(btnClearCanva);
+            flowLayoutPanel1.Controls.Add(numThickness);
             flowLayoutPanel1.Controls.Add(btnLine);
+            flowLayoutPanel1.Controls.Add(btnFreehand);
             flowLayoutPanel1.Controls.Add(btnRectangle);
             flowLayoutPanel1.Controls.Add(btnEllipse);
-            flowLayoutPanel1.Controls.Add(btnEraser);
+            flowLayoutPanel1.Controls.Add(btnColor);
             flowLayoutPanel1.Controls.Add(btnBucket);
-            flowLayoutPanel1.Controls.Add(label1);
-            flowLayoutPanel1.Controls.Add(numThickness);
             flowLayoutPanel1.Controls.Add(label2);
             flowLayoutPanel1.Controls.Add(lblTool);
             flowLayoutPanel1.Controls.Add(label3);
-            flowLayoutPanel1.Controls.Add(lblThickness);
-            flowLayoutPanel1.Controls.Add(label4);
-            flowLayoutPanel1.Controls.Add(lblColor);
-            flowLayoutPanel1.Controls.Add(btnClearCanva);
-            flowLayoutPanel1.Controls.Add(btnUndo);
-            flowLayoutPanel1.Controls.Add(btnRedo);
-            flowLayoutPanel1.Dock = DockStyle.Top;
+            flowLayoutPanel1.Dock = DockStyle.Left;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1036, 109);
+            flowLayoutPanel1.Size = new Size(53, 625);
             flowLayoutPanel1.TabIndex = 1;
-            // 
-            // btnColor
-            // 
-            btnColor.Location = new Point(3, 3);
-            btnColor.Name = "btnColor";
-            btnColor.Size = new Size(94, 29);
-            btnColor.TabIndex = 0;
-            btnColor.Text = "Color";
-            btnColor.UseVisualStyleBackColor = true;
-            btnColor.Click += btnColor_Click;
+            flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(103, 3);
+            btnSave.BackgroundImage = Properties.Resources.images;
+            btnSave.BackgroundImageLayout = ImageLayout.Zoom;
+            btnSave.Location = new Point(3, 3);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(94, 29);
+            btnSave.Size = new Size(47, 47);
             btnSave.TabIndex = 1;
-            btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
-            // btnFreehand
-            // 
-            btnFreehand.Location = new Point(203, 3);
-            btnFreehand.Name = "btnFreehand";
-            btnFreehand.RightToLeft = RightToLeft.No;
-            btnFreehand.Size = new Size(94, 29);
-            btnFreehand.TabIndex = 11;
-            btnFreehand.Text = "Freehand";
-            btnFreehand.UseVisualStyleBackColor = true;
-            btnFreehand.Click += btnFreehand_Click;
-            // 
-            // btnLine
-            // 
-            btnLine.Location = new Point(303, 3);
-            btnLine.Name = "btnLine";
-            btnLine.RightToLeft = RightToLeft.No;
-            btnLine.Size = new Size(94, 29);
-            btnLine.TabIndex = 2;
-            btnLine.Text = "Line";
-            btnLine.UseVisualStyleBackColor = true;
-            btnLine.Click += btnLine_Click;
-            // 
-            // btnRectangle
-            // 
-            btnRectangle.Location = new Point(403, 3);
-            btnRectangle.Name = "btnRectangle";
-            btnRectangle.Size = new Size(107, 29);
-            btnRectangle.TabIndex = 3;
-            btnRectangle.Text = "Rectangle";
-            btnRectangle.UseVisualStyleBackColor = true;
-            btnRectangle.Click += btnRectangle_Click;
-            // 
-            // btnEllipse
-            // 
-            btnEllipse.Location = new Point(516, 3);
-            btnEllipse.Name = "btnEllipse";
-            btnEllipse.Size = new Size(94, 29);
-            btnEllipse.TabIndex = 4;
-            btnEllipse.Text = "Ellipse";
-            btnEllipse.UseVisualStyleBackColor = true;
-            btnEllipse.Click += btnEllipse_Click;
-            // 
-            // btnEraser
-            // 
-            btnEraser.Location = new Point(616, 3);
-            btnEraser.Name = "btnEraser";
-            btnEraser.Size = new Size(94, 29);
-            btnEraser.TabIndex = 5;
-            btnEraser.Text = "Eraser";
-            btnEraser.UseVisualStyleBackColor = true;
-            btnEraser.Click += btnEraser_Click;
-            // 
-            // btnBucket
-            // 
-            btnBucket.Location = new Point(716, 3);
-            btnBucket.Margin = new Padding(3, 3, 150, 3);
-            btnBucket.Name = "btnBucket";
-            btnBucket.Size = new Size(94, 29);
-            btnBucket.TabIndex = 18;
-            btnBucket.Text = "Bucket";
-            btnBucket.UseVisualStyleBackColor = true;
-            btnBucket.Click += btnBucket_Click;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(3, 43);
-            label1.Margin = new Padding(3, 8, 3, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(99, 19);
-            label1.TabIndex = 7;
-            label1.Text = "Thickness:";
-            // 
-            // numThickness
-            // 
-            numThickness.Location = new Point(108, 38);
-            numThickness.Name = "numThickness";
-            numThickness.Size = new Size(94, 27);
-            numThickness.TabIndex = 6;
-            numThickness.ValueChanged += numThickness_ValueChanged;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(208, 43);
-            label2.Margin = new Padding(3, 8, 3, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(126, 19);
-            label2.TabIndex = 15;
-            label2.Text = "Current Tool:";
-            // 
-            // lblTool
-            // 
-            lblTool.AutoSize = true;
-            lblTool.Location = new Point(340, 43);
-            lblTool.Margin = new Padding(3, 8, 3, 0);
-            lblTool.Name = "lblTool";
-            lblTool.Size = new Size(45, 19);
-            lblTool.TabIndex = 8;
-            lblTool.Text = "Tool";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(391, 43);
-            label3.Margin = new Padding(3, 8, 3, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(171, 19);
-            label3.TabIndex = 16;
-            label3.Text = "Current Thickness:";
-            // 
-            // lblThickness
-            // 
-            lblThickness.AutoSize = true;
-            lblThickness.Location = new Point(568, 43);
-            lblThickness.Margin = new Padding(3, 8, 3, 0);
-            lblThickness.Name = "lblThickness";
-            lblThickness.Size = new Size(45, 19);
-            lblThickness.TabIndex = 10;
-            lblThickness.Text = "    ";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(619, 43);
-            label4.Margin = new Padding(3, 8, 3, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(63, 19);
-            label4.TabIndex = 17;
-            label4.Text = "Color:";
-            // 
-            // lblColor
-            // 
-            lblColor.AutoSize = true;
-            lblColor.Location = new Point(688, 43);
-            lblColor.Margin = new Padding(3, 8, 150, 0);
-            lblColor.Name = "lblColor";
-            lblColor.Size = new Size(72, 19);
-            lblColor.TabIndex = 9;
-            lblColor.Text = "       ";
-            // 
-            // btnClearCanva
-            // 
-            btnClearCanva.Location = new Point(3, 71);
-            btnClearCanva.Name = "btnClearCanva";
-            btnClearCanva.Size = new Size(147, 29);
-            btnClearCanva.TabIndex = 12;
-            btnClearCanva.Text = "Clear Canvas";
-            btnClearCanva.UseVisualStyleBackColor = true;
-            btnClearCanva.Click += btnClearCanvas_Click;
-            // 
             // btnUndo
             // 
-            btnUndo.Location = new Point(156, 71);
+            btnUndo.BackgroundImage = Properties.Resources._60690_removebg_preview;
+            btnUndo.BackgroundImageLayout = ImageLayout.Zoom;
+            btnUndo.Location = new Point(3, 56);
             btnUndo.Name = "btnUndo";
-            btnUndo.Size = new Size(147, 29);
+            btnUndo.Size = new Size(47, 47);
             btnUndo.TabIndex = 13;
-            btnUndo.Text = "Undo";
             btnUndo.UseVisualStyleBackColor = true;
             btnUndo.Click += btnUndo_Click;
             // 
             // btnRedo
             // 
-            btnRedo.Location = new Point(309, 71);
+            btnRedo.BackgroundImage = Properties.Resources._60690_removebg_preview___Copy;
+            btnRedo.BackgroundImageLayout = ImageLayout.Zoom;
+            btnRedo.Location = new Point(3, 109);
             btnRedo.Name = "btnRedo";
-            btnRedo.Size = new Size(147, 29);
+            btnRedo.Size = new Size(47, 47);
             btnRedo.TabIndex = 14;
-            btnRedo.Text = "Redo";
             btnRedo.UseVisualStyleBackColor = true;
             btnRedo.Click += btnRedo_Click;
             // 
+            // btnEraser
+            // 
+            btnEraser.BackgroundImage = Properties.Resources.eraser_icon_in_trendy_flat_style_isolated_on_white_background_rubber_eraser_silhouette_symbol_great_for_website_app_and_logo_design_illustration_free_vector;
+            btnEraser.BackgroundImageLayout = ImageLayout.Zoom;
+            btnEraser.Location = new Point(3, 162);
+            btnEraser.Name = "btnEraser";
+            btnEraser.Size = new Size(47, 47);
+            btnEraser.TabIndex = 5;
+            btnEraser.UseVisualStyleBackColor = true;
+            btnEraser.Click += btnEraser_Click;
+            // 
+            // btnClearCanva
+            // 
+            btnClearCanva.BackgroundImage = Properties.Resources.clear_icon_png_19_removebg_preview;
+            btnClearCanva.BackgroundImageLayout = ImageLayout.Zoom;
+            btnClearCanva.Location = new Point(3, 215);
+            btnClearCanva.Name = "btnClearCanva";
+            btnClearCanva.Size = new Size(47, 47);
+            btnClearCanva.TabIndex = 12;
+            btnClearCanva.UseVisualStyleBackColor = true;
+            btnClearCanva.Click += btnClearCanvas_Click;
+            // 
+            // numThickness
+            // 
+            numThickness.Location = new Point(3, 268);
+            numThickness.Name = "numThickness";
+            numThickness.Size = new Size(47, 27);
+            numThickness.TabIndex = 6;
+            numThickness.ValueChanged += numThickness_ValueChanged;
+            // 
+            // btnLine
+            // 
+            btnLine.BackgroundImage = Properties.Resources._BE78CB57_C627_461C_A44F_6B1D0B3BA20F_;
+            btnLine.BackgroundImageLayout = ImageLayout.Zoom;
+            btnLine.Location = new Point(3, 301);
+            btnLine.Name = "btnLine";
+            btnLine.RightToLeft = RightToLeft.No;
+            btnLine.Size = new Size(47, 47);
+            btnLine.TabIndex = 2;
+            btnLine.UseVisualStyleBackColor = true;
+            btnLine.Click += btnLine_Click;
+            // 
+            // btnFreehand
+            // 
+            btnFreehand.BackgroundImage = Properties.Resources._97A898FC_E4C0_410D_AE04_1CF6FAE655FB_;
+            btnFreehand.BackgroundImageLayout = ImageLayout.Zoom;
+            btnFreehand.Location = new Point(3, 354);
+            btnFreehand.Name = "btnFreehand";
+            btnFreehand.RightToLeft = RightToLeft.No;
+            btnFreehand.Size = new Size(47, 47);
+            btnFreehand.TabIndex = 11;
+            btnFreehand.UseVisualStyleBackColor = true;
+            btnFreehand.Click += btnFreehand_Click;
+            // 
+            // btnRectangle
+            // 
+            btnRectangle.BackgroundImage = Properties.Resources._8D796C45_C40A_48A8_B6E8_B90846B752EA_;
+            btnRectangle.BackgroundImageLayout = ImageLayout.Zoom;
+            btnRectangle.Location = new Point(3, 407);
+            btnRectangle.Name = "btnRectangle";
+            btnRectangle.Size = new Size(47, 47);
+            btnRectangle.TabIndex = 3;
+            btnRectangle.UseVisualStyleBackColor = true;
+            btnRectangle.Click += btnRectangle_Click;
+            // 
+            // btnEllipse
+            // 
+            btnEllipse.BackgroundImage = Properties.Resources._1E4967AC_1C3E_4F8C_AC35_89AE2B58EA6F_;
+            btnEllipse.BackgroundImageLayout = ImageLayout.Zoom;
+            btnEllipse.Location = new Point(3, 460);
+            btnEllipse.Name = "btnEllipse";
+            btnEllipse.Size = new Size(47, 47);
+            btnEllipse.TabIndex = 4;
+            btnEllipse.UseVisualStyleBackColor = true;
+            btnEllipse.Click += btnEllipse_Click;
+            // 
+            // btnColor
+            // 
+            btnColor.BackgroundImage = Properties.Resources.color1;
+            btnColor.BackgroundImageLayout = ImageLayout.Zoom;
+            btnColor.Location = new Point(3, 513);
+            btnColor.Name = "btnColor";
+            btnColor.Size = new Size(47, 47);
+            btnColor.TabIndex = 0;
+            btnColor.UseVisualStyleBackColor = true;
+            btnColor.Click += btnColor_Click;
+            // 
+            // btnBucket
+            // 
+            btnBucket.BackgroundImage = Properties.Resources.bucket_icon_vector1;
+            btnBucket.BackgroundImageLayout = ImageLayout.Zoom;
+            btnBucket.Location = new Point(3, 566);
+            btnBucket.Margin = new Padding(3, 3, 133, 3);
+            btnBucket.Name = "btnBucket";
+            btnBucket.Size = new Size(47, 47);
+            btnBucket.TabIndex = 18;
+            btnBucket.UseVisualStyleBackColor = true;
+            btnBucket.Click += btnBucket_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(3, 624);
+            label2.Margin = new Padding(3, 8, 3, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(0, 20);
+            label2.TabIndex = 15;
+            // 
+            // lblTool
+            // 
+            lblTool.AutoSize = true;
+            lblTool.Location = new Point(9, 624);
+            lblTool.Margin = new Padding(3, 8, 3, 0);
+            lblTool.Name = "lblTool";
+            lblTool.Size = new Size(0, 20);
+            lblTool.TabIndex = 8;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(15, 624);
+            label3.Margin = new Padding(3, 8, 3, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(0, 20);
+            label3.TabIndex = 16;
+            // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(9F, 19F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1036, 643);
+            BackColor = SystemColors.ActiveCaption;
+            ClientSize = new Size(1103, 625);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(picCanvas);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -317,18 +280,14 @@
         private Button btnRectangle;
         private Button btnEllipse;
         private Button btnEraser;
-        private Label label1;
         private NumericUpDown numThickness;
         private Label lblTool;
-        private Label lblColor;
-        private Label lblThickness;
         private Button btnFreehand;
         private Button btnClearCanva;
         private Button btnUndo;
         private Button btnRedo;
         private Label label2;
         private Label label3;
-        private Label label4;
         private Button btnBucket;
     }
 }

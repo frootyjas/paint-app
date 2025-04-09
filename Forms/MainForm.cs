@@ -16,7 +16,6 @@ namespace midterm_project
         {
             InitializeComponent();
             InitializeCanvas();
-            SetStatusLabels();
             SetKeyboardShortcuts();
             SelectTool(new FreehandTool());
         }
@@ -31,12 +30,6 @@ namespace midterm_project
             // Update pen settings with current bitmap
             penSettings.CanvasBitmap = canvasBitmap;
 
-        }
-
-        private void SetStatusLabels()
-        {
-            lblColor.BackColor = penSettings.Color;
-            lblThickness.Text = penSettings.Thickness.ToString();
         }
 
         private void SetKeyboardShortcuts()
@@ -178,14 +171,12 @@ namespace midterm_project
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 penSettings.Color = colorDialog.Color;
-                SetStatusLabels();
             }
         }
 
         private void numThickness_ValueChanged(object sender, EventArgs e)
         {
             penSettings.Thickness = (int)numThickness.Value;
-            SetStatusLabels();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -201,6 +192,11 @@ namespace midterm_project
                     canvasBitmap.Save(saveDialog.FileName, format);
                 }
             }
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
